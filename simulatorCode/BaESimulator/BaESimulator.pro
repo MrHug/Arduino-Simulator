@@ -31,7 +31,8 @@ SOURCES += main.cpp\
     sensor.cpp \
     map0.cpp \
     irsensorthread.cpp \
-    map2.cpp
+    map2.cpp \
+    map3.cpp
 
 HEADERS  += simulatorwindow.h \
     robot.h \
@@ -51,6 +52,7 @@ HEADERS  += simulatorwindow.h \
     sensor.h \
     map0.h \
     irsensorthread.h \
-    map2.h
+    map2.h \
+    map3.h
 
 FORMS    += simulatorwindow.ui

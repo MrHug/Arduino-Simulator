@@ -142,3 +142,8 @@ void SimulatorWindow::on_btnMap2_clicked()
 {
     this->sim->setMap(2);
 }
+
+void SimulatorWindow::on_btnMap3_clicked()
+{
+    this->sim->setMap(3);
+}

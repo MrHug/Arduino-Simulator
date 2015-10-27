@@ -44,6 +44,8 @@ private slots:
 
     void on_btnMap2_clicked();
 
+    void on_btnMap3_clicked();
+
 private:
     Ui::SimulatorWindow *ui;
 

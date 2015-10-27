@@ -9,6 +9,7 @@
 #include "map0.h"
 #include "map1.h"
 #include "map2.h"
+#include "map3.h"
 #include "qpainter.h"
 #include "qstring.h"
 #include <qmessagebox.h>
@@ -92,6 +93,9 @@ void Simulator::setMap(int mapNum) {
             break;
         case 2:
             this->map = new Map2(2*CENTER_X, 2*CENTER_Y);
+            break;
+        case 3:
+            this->map = new Map3(2*CENTER_X, 2*CENTER_Y);
             break;
     }
     this->draw();
