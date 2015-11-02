@@ -35,13 +35,14 @@ Simulator::~Simulator() {
     for (int i = US_SENSOR_0; i< NUMBER_OF_US_SENSORS; i++) {
         usSensorThreads[i]->terminate();
     }
+    taskSwitchTread->terminate();
     delete robot;
     delete map;
 }
 
 bool Simulator::startFromFile(QString &fileName) {
     this->parent->addLog(QString("Starting from file %1").arg(fileName));
-    QString cmd = QString("cp %1 ./simFiles/logic.ino").arg(fileName);
+    QString cmd = QString("cp %1 ./simFiles/tasks.ino").arg(fileName);
     int x = system(cmd.toStdString().c_str());
     this->parent->addLog(QString("Result of cp: %1").arg(x));
     x = system("cd simFiles && make");
@@ -134,6 +135,7 @@ void Simulator::createFifos() {
         fileName += ".pipe";
         mkfifo(fileName.toStdString().c_str(), 0666);
     }
+    mkfifo("taskSwitch.pipe",0666);
 }
 
 void Simulator::createThreads() {
@@ -156,6 +158,8 @@ void Simulator::createThreads() {
         irSensorThreads[i] = new IRSensorThread(NULL, robot->irSensors[i], fileName.toStdString().c_str());
         irSensorThreads[i]->start();
     }
+    taskSwitchTread = new TaskSwitchThread(NULL, &robot->taskSwitch, "taskSwitch.pipe");
+    taskSwitchTread->start();
 }
 
 bool Simulator::checkCollision() {
@@ -255,6 +259,7 @@ void Simulator::updateSensors() {
     for (int i = IR_SENSOR_0; i< NUMBER_OF_IR_SENSORS; i++) {
         irSensorThreads[i]->updated = true;
     }
+    taskSwitchTread->updated = true;
 }
 
 void Simulator::getRobotPoints(QPoint p[]) {

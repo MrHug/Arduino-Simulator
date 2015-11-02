@@ -156,3 +156,15 @@ void SimulatorWindow::on_btnMap4_clicked()
 {
     this->sim->setMap(4);
 }
+
+void SimulatorWindow::on_spBoxTask_editingFinished()
+{
+    this->addLog(QString("Task set to %1").arg(this->ui->spBoxTask->value()));
+    this->sim->robot->taskSwitch.updateValue(this->ui->spBoxTask->value() -1);
+}
+
+void SimulatorWindow::on_spBoxTask_valueChanged(int arg1)
+{
+    this->addLog(QString("Task set to %1").arg(this->ui->spBoxTask->value()));
+    this->sim->robot->taskSwitch.updateValue(this->ui->spBoxTask->value() -1);
+}

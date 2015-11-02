@@ -1,20 +1,48 @@
 #include "logic.h"
 #include "sensors.h"
+#include <stdlib.h>
+#include <stdio.h>
+#include <pthread.h>
+#include <unistd.h>                                                              
+#include <fcntl.h>       
 
-int switch0 = 12;
-int switch1 = 13;
+int switchvalue;
+pthread_t switch_thread;
+
+void *switchThreadFunction(){
+	printf("Switch thread started\n");
+	int file = open("taskSwitch.pipe", O_RDONLY);
+	if (file < 0) {
+		printf("Could not open Switch, error code %d\n", file);
+		return NULL;
+	}
+	while(1) {
+		int prev = switchvalue;
+		int new;
+		read(file, &new, 4);
+		if(prev != new) {
+			switchvalue = new;
+			printf("Got new switch value: %d\n", new);
+		}
+	}
+	close(file);
+	return NULL;
+}
+
+void initSwitch() {
+	pthread_create(&switch_thread, NULL, (void *(*)(void*))switchThreadFunction, NULL); 
+}
 
 void setup() { // put your setup code here, to run once:
       initUSSensors();
       initIRSensors();
       initMotors();
-
-      Serial.begin(9600);
-      pinMode(13, OUTPUT);
-      pinMode(switch0, INPUT);
-      pinMode(switch1, INPUT);
+			initSwitch();
 }
 
+int getSwitchValue() {
+  return switchvalue;
+}
 
 void loop() {
  switch(getSwitchValue()) { 
@@ -28,14 +56,8 @@ void loop() {
      task3();
      break;
  }
- delay(500);
 }
 
-int getSwitchValue() {
-  int a = digitalRead(switch0);
-  int b = digitalRead(switch1);
-  return 2*b + a;
-}
 
 
 int main() {
@@ -46,3 +68,4 @@ int main() {
 	}
 	return 0;
 }
+

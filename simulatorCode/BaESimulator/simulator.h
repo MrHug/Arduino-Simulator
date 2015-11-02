@@ -9,6 +9,7 @@ class Simulator;
 #include "motorthread.h"
 #include "ussensorthread.h"
 #include "irsensorthread.h"
+#include "taskswitchthread.h"
 #include "simulatorwindow.h"
 
 #define CENTER_X 350
@@ -44,6 +45,7 @@ private:
     MotorThread *motorThreadLeft, *motorThreadRight;
     USSensorThread *usSensorThreads[NUMBER_OF_US_SENSORS];
     IRSensorThread *irSensorThreads[NUMBER_OF_IR_SENSORS];
+    TaskSwitchThread *taskSwitchTread;
     SimulatorWindow *parent;
     int timerId;
 

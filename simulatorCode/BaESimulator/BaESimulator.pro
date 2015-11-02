@@ -33,7 +33,9 @@ SOURCES += main.cpp\
     irsensorthread.cpp \
     map2.cpp \
     map3.cpp \
-    map4.cpp
+    map4.cpp \
+    taskswitch.cpp \
+    taskswitchthread.cpp
 
 HEADERS  += simulatorwindow.h \
     robot.h \
@@ -55,6 +57,8 @@ HEADERS  += simulatorwindow.h \
     irsensorthread.h \
     map2.h \
     map3.h \
-    map4.h
+    map4.h \
+    taskswitch.h \
+    taskswitchthread.h
 
 FORMS    += simulatorwindow.ui

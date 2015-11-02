@@ -50,6 +50,10 @@ private slots:
 
     void on_btnMap4_clicked();
 
+    void on_spBoxTask_editingFinished();
+
+    void on_spBoxTask_valueChanged(int arg1);
+
 private:
     Ui::SimulatorWindow *ui;
 

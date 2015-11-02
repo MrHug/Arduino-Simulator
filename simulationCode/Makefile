@@ -6,7 +6,7 @@ OFILES = ${OFILESBASIC} tasks.o
 
 all: arduinoSim
 
-arduinoSim: ${OFILES} 
+arduinoSim: ${OFILES} simLib.so
 	gcc -o $@ $^ ${CFLAGS} -lpthread 
 	cp $@ ..
 	cp simLib.so ..
@@ -25,10 +25,11 @@ clean:
 	rm arduinoSim
 	rm simLib.so
 	rm -rf ${OFILES}
-	rm -rf logic.c 
+	rm -rf tasks.c 
 
 moveToBuildFolder:
 	rm ../simulatorCode/build*/simFiles -rf
 	cp . ../simulatorCode/build-BaESimulator-Desktop-Debug/simFiles -r
+	cp . ../simulatorCode/build-BaESimulator-Delft-Debug/simFiles -r
 
 .PHONY: all clean moveToBuildFolder

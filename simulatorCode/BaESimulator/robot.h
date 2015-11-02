@@ -4,8 +4,10 @@
 #include "motor.h"
 #include "ussensor.h"
 #include "irsensor.h"
+#include "taskswitch.h"
 #include "line.h"
 #include "map.h"
+
 
 #define ROBOT_WIDTH     10
 #define ROBOT_HEIGHT    10
@@ -26,6 +28,7 @@ public:
     Motor rightMotor;
     USSensor *usSensors[NUMBER_OF_US_SENSORS];
     IRSensor *irSensors[NUMBER_OF_IR_SENSORS];
+    TaskSwitch taskSwitch;
 
 private:
     Point p[4];
