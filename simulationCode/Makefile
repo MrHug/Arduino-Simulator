@@ -6,8 +6,10 @@ OFILES = ${OFILESBASIC} logic.o
 
 all: arduinoSim
 
-arduinoSim: logic.o simLib.so
+arduinoSim: ${OFILES} 
 	gcc -o $@ $^ ${CFLAGS} -lpthread 
+	cp $@ ..
+	cp simLib.so ..
 
 simLib.so: ${OFILESBASIC} 
 	gcc -shared  -o $@ $^ 

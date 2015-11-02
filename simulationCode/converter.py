@@ -10,9 +10,11 @@ with (open(inputName, 'r')) as inputFile:
 		inputString = inputString.replace("pinMode", "//pinMode")
 		inputString = inputString.replace("digitalWrite", "//digitalWrite")
 		inputString = inputString.replace("pulseIn", "//pulseIn")
-		outputString = '#include "logic.h"\n'+ inputString + """\n void main() { 
+		inputString = inputString.replace("delay", "//delay")
+		outputString = '#include "logic.h"\n'+ inputString + """\n int main() { 
 			setup();
 			while(1) { usleep(100000); loop();}
+			return 1;
 		}"""
 
 #		print outputString

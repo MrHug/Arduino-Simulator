@@ -14,6 +14,7 @@ typedef enum {
 void initIRSensors();
 void closeIRSensors();
 
+
 int getIRSensor(irsensor_t);
 
 #endif

@@ -11,6 +11,7 @@ typedef enum {
 void initUSSensors();
 void closeUSSensors();
 
+void updateUSSensors();
 int getUSSensor(ussensor_t);
 
 #endif

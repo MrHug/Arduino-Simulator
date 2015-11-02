@@ -63,3 +63,6 @@ int getUSSensor(ussensor_t sensor) {
 	} 
 	return 300;
 }
+
+
+void updateUSSensors(){}

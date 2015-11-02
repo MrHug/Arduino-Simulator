@@ -20,5 +20,6 @@ void turnRight();
 void goFwdLeft();
 void goFwdRight();
 void stop();
+void stopMotors();
 
 #endif

@@ -86,3 +86,8 @@ void stop() {
 	setMotorSpeed(MOTOR_LEFT, 0);
 	setMotorSpeed(MOTOR_RIGHT, 0);
 }
+
+void stopMotors() {
+	setMotorSpeed(MOTOR_LEFT, 0);
+	setMotorSpeed(MOTOR_RIGHT, 0);
+}
