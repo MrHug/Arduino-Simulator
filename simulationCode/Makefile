@@ -1,8 +1,8 @@
 CC = gcc
 CFLAGS= -std=c99 -W -Wall -I. -g -O3 -fPIC
 DEPS = motors.h ussensor.h irsensor.h logic.h Makefile
-OFILESBASIC = motors.o ussensor.o irsensor.o
-OFILES = ${OFILESBASIC} logic.o
+OFILESBASIC = motors.o ussensor.o irsensor.o logic.o
+OFILES = ${OFILESBASIC} tasks.o
 
 all: arduinoSim
 
@@ -15,8 +15,8 @@ simLib.so: ${OFILESBASIC}
 	gcc -shared  -o $@ $^ 
 	
 
-logic.c: logic.ino
-	./converter.py logic.ino
+tasks.c: tasks.ino
+	./converter.py tasks.ino
 
 %.o: %.c
 	$(CC) -D _BSD_SOURCE -c -o $@ $< ${CFLAGS}

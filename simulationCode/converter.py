@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-inputName = "logic.ino"
+inputName = "tasks.ino"
 outputName = inputName.replace(".ino", ".c")
 
 with (open(inputName, 'r')) as inputFile:
@@ -11,11 +11,6 @@ with (open(inputName, 'r')) as inputFile:
 		inputString = inputString.replace("digitalWrite", "//digitalWrite")
 		inputString = inputString.replace("pulseIn", "//pulseIn")
 		inputString = inputString.replace("delay", "//delay")
-		outputString = '#include "logic.h"\n'+ inputString + """\n int main() { 
-			setup();
-			while(1) { usleep(100000); loop();}
-			return 1;
-		}"""
 
 #		print outputString
 		outputFile.write(outputString)
