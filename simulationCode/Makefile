@@ -6,10 +6,9 @@ OFILES = ${OFILESBASIC} tasks.o
 
 all: arduinoSim
 
-arduinoSim: ${OFILES} simLib.so
+arduinoSim: ${OFILES} 
 	gcc -o $@ $^ ${CFLAGS} -lpthread 
 	cp $@ ..
-	cp simLib.so ..
 
 simLib.so: ${OFILESBASIC} 
 	gcc -shared  -o $@ $^ 
@@ -22,8 +21,8 @@ tasks.c: tasks.ino
 	$(CC) -D _BSD_SOURCE -c -o $@ $< ${CFLAGS}
 
 clean:
-	rm arduinoSim
-	rm simLib.so
+	rm -f arduinoSim
+	rm -f simLib.so
 	rm -rf ${OFILES}
 	rm -rf tasks.c 
 
