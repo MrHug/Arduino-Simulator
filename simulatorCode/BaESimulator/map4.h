@@ -1,10 +1,12 @@
 #ifndef MAP4_H
 #define MAP4_H
 
-class Map4
+#include "map.h"
+
+class Map4 : public Map
 {
 public:
-    Map4();
+    Map4(double width, double height);
 };
 
 #endif // MAP4_H

@@ -147,3 +147,12 @@ void SimulatorWindow::on_btnMap3_clicked()
 {
     this->sim->setMap(3);
 }
+
+void SimulatorWindow::addLog(QString string) {
+    this->ui->logBox->addItem(string);
+}
+
+void SimulatorWindow::on_btnMap4_clicked()
+{
+    this->sim->setMap(4);
+}

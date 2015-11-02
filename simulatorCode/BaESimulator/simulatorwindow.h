@@ -19,6 +19,7 @@ public:
     ~SimulatorWindow();
     void updateInformation();
 
+    void addLog(QString);
 private slots:
     void on_BtnStart_clicked();
     void on_BtnStop_clicked();
@@ -45,6 +46,9 @@ private slots:
     void on_btnMap2_clicked();
 
     void on_btnMap3_clicked();
+
+
+    void on_btnMap4_clicked();
 
 private:
     Ui::SimulatorWindow *ui;

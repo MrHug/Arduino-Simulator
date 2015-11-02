@@ -10,6 +10,7 @@
 #include "map1.h"
 #include "map2.h"
 #include "map3.h"
+#include "map4.h"
 #include "qpainter.h"
 #include "qstring.h"
 #include <qmessagebox.h>
@@ -39,22 +40,23 @@ Simulator::~Simulator() {
 }
 
 bool Simulator::startFromFile(QString &fileName) {
-    printf("Starting from file %s\n", fileName.toStdString().c_str());
+    this->parent->addLog(QString("Starting from file %1").arg(fileName));
     QString cmd = QString("cp %1 ./simFiles/logic.ino").arg(fileName);
-    system(cmd.toStdString().c_str());
-    int x = system("cd simFiles && make");
-    printf("Result of make %d\n", x);
+    int x = system(cmd.toStdString().c_str());
+    this->parent->addLog(QString("Result of cp: %1").arg(x));
+    x = system("cd simFiles && make");
+    this->parent->addLog(QString("Result of make: %1").arg(x));
     if (x == 0) {
         x = system("./arduinoSim &");
         if (x == 0) {
             createThreads();
             updateSensors();
         } else {
-            printf("Failed to start application");
+            this->parent->addLog(QString("Can not start simulation. Ask a TA for assistance"));
         }
     } else {
         QMessageBox messageBox;
-        messageBox.critical(0,"Error","The code provided here can not be compiled !");
+        messageBox.critical(0,"Error","The code provided here can not be compiled! Check the Arduino error messages");
         messageBox.setFixedSize(500,200);
         messageBox.show();
     }
@@ -96,6 +98,9 @@ void Simulator::setMap(int mapNum) {
             break;
         case 3:
             this->map = new Map3(2*CENTER_X, 2*CENTER_Y);
+            break;
+        case 4:
+            this->map = new Map4(2*CENTER_X, 2*CENTER_Y);
             break;
     }
     this->draw();
