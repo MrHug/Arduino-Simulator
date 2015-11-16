@@ -19,6 +19,7 @@ char *us_files[NUMBER_OF_USSENSORS] = {
 };
 
 int usvalues[NUMBER_OF_USSENSORS];
+int usRealvalues[NUMBER_OF_USSENSORS];
 
 usdata_t usData[NUMBER_OF_USSENSORS];
 
@@ -31,11 +32,11 @@ void *usThreadFunction(usdata_t *data){
 		return NULL;
 	}
 	while(us_running) {
-		int prev = usvalues[num];
+		int prev = usRealvalues[num];
 		int new;
 		read(file, &new, 4);
 		if(prev != new) {
-			usvalues[num] = new;
+			usRealvalues[num] = new;
 			printf("Got new value for US sensor %d: %d\n", num, usvalues[num]);
 		}
 	}
@@ -65,4 +66,8 @@ int getUSSensor(ussensor_t sensor) {
 }
 
 
-void updateUSSensors(){}
+void updateUSSensors(){
+	for (int i = 0; i < NUMBER_OF_USSENSORS; i++) {
+		usvalues[i] = usRealvalues[i];
+	}
+}
