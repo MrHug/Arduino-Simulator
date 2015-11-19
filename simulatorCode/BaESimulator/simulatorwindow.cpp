@@ -38,6 +38,7 @@ void SimulatorWindow::on_BtnStart_clicked()
     sim->start();
     ui->BtnStart->setEnabled(false);
     ui->BtnStop->setEnabled(true);
+    ui->BtnReset->setEnabled(true);
 }
 void SimulatorWindow::on_BtnStop_clicked()
 {
@@ -168,3 +169,14 @@ void SimulatorWindow::on_spBoxTask_valueChanged(int arg1)
     this->addLog(QString("Task set to %1").arg(this->ui->spBoxTask->value()));
     this->sim->robot->taskSwitch.updateValue(this->ui->spBoxTask->value() -1);
 }
+
+void SimulatorWindow::on_BtnReset_clicked()
+{
+    this->sim->reset();
+    ui->BtnStart->setEnabled(false);
+    ui->BtnStep->setEnabled(false);
+    ui->BtnStop->setEnabled(false);
+    ui->BtnReset->setEnabled(false);
+    ui->BtnOpen->setEnabled(true);
+}
+

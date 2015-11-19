@@ -45,6 +45,7 @@ int getSwitchValue() {
 }
 
 void loop() {
+updateUSSensors();
  switch(getSwitchValue()) { 
    case 0:
      task1();

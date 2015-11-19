@@ -13,6 +13,7 @@ with (open(inputName, 'r')) as inputFile:
 		inputString = inputString.replace("delay", "//delay")
 		outputString = inputString
 #		print outputString
+		outputFile.write('#include "logic.h"\n')
 		outputFile.write(outputString)
 
 print "done with conversion"

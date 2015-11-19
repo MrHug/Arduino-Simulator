@@ -54,6 +54,8 @@ private slots:
 
     void on_spBoxTask_valueChanged(int arg1);
 
+    void on_BtnReset_clicked();
+
 private:
     Ui::SimulatorWindow *ui;
 

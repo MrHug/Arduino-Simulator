@@ -30,11 +30,13 @@ public:
     IRSensor *irSensors[NUMBER_OF_IR_SENSORS];
     TaskSwitch taskSwitch;
 
+    void resetPoints();
+
 private:
     Point p[4];
 
     void rotateAndTranslatePoints(double angle, Point *translation);
-    void resetPoints();
+
 
 
     double getAngle(Point leftCenter, Point rightCenter);

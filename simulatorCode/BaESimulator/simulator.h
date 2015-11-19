@@ -20,11 +20,12 @@ class Simulator : public QGroupBox
 public:
     Simulator(SimulatorWindow *parent);
     ~Simulator();
-
+    void cleanup();
     bool startFromFile(QString &fileName);
     void start();
     void step();
     void stop();
+    void reset();
     void setMap(int mapNum);
     Robot *robot;
 private:
@@ -48,6 +49,7 @@ private:
     TaskSwitchThread *taskSwitchTread;
     SimulatorWindow *parent;
     int timerId;
+    int mapNum;
 
 public slots:
     void paintEvent(QPaintEvent *event);

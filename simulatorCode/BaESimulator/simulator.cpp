@@ -28,16 +28,24 @@ Simulator::Simulator(SimulatorWindow *parent) :
 }
 
 Simulator::~Simulator() {
-    printf("Destroying simulator\n");
-    system("ps -Af | grep ./arduinoSim | awk '{ print $2 }' | head -n 1 | xargs kill");
+    this->cleanup();
+    delete robot;
+    delete map;
+}
+
+void Simulator::cleanup() {
+    this->parent->addLog("Cleaning simulator");
+    int x = system("ps -Af | grep ./arduinoSim | awk '{ print $2 }' | head -n 1 | xargs kill");
+    this->parent->addLog(QString("ps kill output: %1").arg(x));
     motorThreadLeft->terminate();
     motorThreadRight->terminate();
     for (int i = US_SENSOR_0; i< NUMBER_OF_US_SENSORS; i++) {
         usSensorThreads[i]->terminate();
     }
+    for (int i = IR_SENSOR_0; i< NUMBER_OF_IR_SENSORS; i++) {
+        irSensorThreads[i]->terminate();
+    }
     taskSwitchTread->terminate();
-    delete robot;
-    delete map;
 }
 
 bool Simulator::startFromFile(QString &fileName) {
@@ -76,6 +84,7 @@ void Simulator::step() {
     parent->updateInformation();
     if (collided) {
         printf("Collided, so stopping\n");
+        parent->addLog("Collided with wall, stopping simulation");
         this->stop();
     }
 }
@@ -84,9 +93,16 @@ void Simulator::stop() {
     this->killTimer(timerId);
 }
 
+void Simulator::reset() {
+    this->stop();
+    this->cleanup();
+    this->setMap(mapNum);
+}
+
 void Simulator::setMap(int mapNum) {
     delete this->map;
-    printf("Resetting Map\n");
+    this->parent->addLog("Resetting Map\n");
+    this->robot->resetPoints();
     switch (mapNum) {
         case 0:
             this->map = new Map0(2*CENTER_X, 2*CENTER_Y);
@@ -104,6 +120,7 @@ void Simulator::setMap(int mapNum) {
             this->map = new Map4(2*CENTER_X, 2*CENTER_Y);
             break;
     }
+    this->mapNum = mapNum;
     this->draw();
 }
 
