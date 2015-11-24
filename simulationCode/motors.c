@@ -11,12 +11,12 @@ static int motor_r;
 void initMotors() {
 	motor_l = 0;
 	motor_r = 0;
-	motor_l = open("MotorL.pipe", O_WRONLY);
+	motor_l = open("/tmp/MotorL.pipe", O_WRONLY);
 	if (motor_l < 0) {
 		printf("Could not open left motor, error code %d\n", motor_l);
 		return;
 	}
-	motor_r = open("MotorR.pipe", O_WRONLY);
+	motor_r = open("/tmp/MotorR.pipe", O_WRONLY);
 	if (motor_r < 0) {
 		printf("Could not open right motor, error code %d\n", motor_r);
 		return;

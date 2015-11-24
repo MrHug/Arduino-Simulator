@@ -13,9 +13,9 @@ typedef struct usdata {
 } usdata_t;
 
 char *us_files[NUMBER_OF_USSENSORS] = {
-	"USSensor0.pipe",
-	"USSensor1.pipe",
-	"USSensor2.pipe"
+	"/tmp/USSensor0.pipe",
+	"/tmp/USSensor1.pipe",
+	"/tmp/USSensor2.pipe"
 };
 
 int usvalues[NUMBER_OF_USSENSORS];

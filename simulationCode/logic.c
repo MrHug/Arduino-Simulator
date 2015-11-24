@@ -11,7 +11,7 @@ pthread_t switch_thread;
 
 void *switchThreadFunction(){
 	printf("Switch thread started\n");
-	int file = open("taskSwitch.pipe", O_RDONLY);
+	int file = open("/tmp/taskSwitch.pipe", O_RDONLY);
 	if (file < 0) {
 		printf("Could not open Switch, error code %d\n", file);
 		return NULL;

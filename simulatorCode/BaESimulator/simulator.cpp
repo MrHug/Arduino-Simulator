@@ -138,30 +138,30 @@ void Simulator::setUpGuiStuff(SimulatorWindow *parent) {
 }
 
 void Simulator::createFifos() {
-    mkfifo("MotorL.pipe", 0666);
-    mkfifo("MotorR.pipe", 0666);
+    mkfifo("/tmp/MotorL.pipe", 0666);
+    mkfifo("/tmp/MotorR.pipe", 0666);
     for (int i = US_SENSOR_0; i< NUMBER_OF_US_SENSORS; i++) {
-        QString fileName = "USSensor";
+        QString fileName = "/tmp/USSensor";
         fileName += QString::number(i);
         fileName += ".pipe";
         mkfifo(fileName.toStdString().c_str(), 0666);
     }
     for (int i = IR_SENSOR_0; i< NUMBER_OF_IR_SENSORS; i++) {
-        QString fileName = "IRSensor";
+        QString fileName = "/tmp/IRSensor";
         fileName += QString::number(i);
         fileName += ".pipe";
         mkfifo(fileName.toStdString().c_str(), 0666);
     }
-    mkfifo("taskSwitch.pipe",0666);
+    mkfifo("/tmp/taskSwitch.pipe",0666);
 }
 
 void Simulator::createThreads() {
-    motorThreadLeft = new MotorThread(NULL,&robot->leftMotor, "MotorL.pipe");
-    motorThreadRight = new MotorThread(NULL,&robot->rightMotor, "MotorR.pipe");
+    motorThreadLeft = new MotorThread(NULL,&robot->leftMotor, "/tmp/MotorL.pipe");
+    motorThreadRight = new MotorThread(NULL,&robot->rightMotor, "/tmp/MotorR.pipe");
     motorThreadLeft->start();
     motorThreadRight->start();
     for (int i = US_SENSOR_0; i< NUMBER_OF_US_SENSORS; i++) {
-        QString fileName = "USSensor";
+        QString fileName = "/tmp/USSensor";
         fileName += QString::number(i);
         fileName += ".pipe";
         usSensorThreads[i] = new USSensorThread(NULL, robot->usSensors[i], fileName.toStdString().c_str());
@@ -169,13 +169,13 @@ void Simulator::createThreads() {
     }
 
     for (int i = IR_SENSOR_0; i< NUMBER_OF_IR_SENSORS; i++) {
-        QString fileName = "IRSensor";
+        QString fileName = "/tmp/IRSensor";
         fileName += QString::number(i);
         fileName += ".pipe";
         irSensorThreads[i] = new IRSensorThread(NULL, robot->irSensors[i], fileName.toStdString().c_str());
         irSensorThreads[i]->start();
     }
-    taskSwitchTread = new TaskSwitchThread(NULL, &robot->taskSwitch, "taskSwitch.pipe");
+    taskSwitchTread = new TaskSwitchThread(NULL, &robot->taskSwitch, "/tmp/taskSwitch.pipe");
     taskSwitchTread->start();
 }
 

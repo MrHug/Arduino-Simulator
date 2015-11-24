@@ -13,12 +13,12 @@ typedef struct irdata {
 } irdata_t;
 
 char *ir_files[NUMBER_OF_IRSENSORS] = {
-	"IRSensor0.pipe",
-	"IRSensor1.pipe",
-	"IRSensor2.pipe",
-	"IRSensor3.pipe",
-	"IRSensor4.pipe",
-	"IRSensor5.pipe"
+	"/tmp/IRSensor0.pipe",
+	"/tmp/IRSensor1.pipe",
+	"/tmp/IRSensor2.pipe",
+	"/tmp/IRSensor3.pipe",
+	"/tmp/IRSensor4.pipe",
+	"/tmp/IRSensor5.pipe"
 };
 
 int irvalues[NUMBER_OF_IRSENSORS];
