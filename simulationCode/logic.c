@@ -70,3 +70,10 @@ int main() {
 	return 0;
 }
 
+int digitalRead(int a) {
+	return 0;
+}
+
+int analogRead(int a) {
+	return 0;
+}

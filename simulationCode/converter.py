@@ -9,6 +9,7 @@ with (open(inputName, 'r')) as inputFile:
 		inputString = inputString.replace("Serial", "//Serial")
 		inputString = inputString.replace("pinMode", "//pinMode")
 		inputString = inputString.replace("digitalWrite", "//digitalWrite")
+		inputString = inputString.replace("analogWrite", "//digitalWrite")
 		inputString = inputString.replace("pulseIn", "//pulseIn")
 		inputString = inputString.replace("delay", "//delay")
 		outputString = inputString
