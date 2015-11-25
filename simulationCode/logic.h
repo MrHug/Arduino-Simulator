@@ -11,6 +11,10 @@
 #define LOW 0
 #define HIGH 1
 
+#define bool int
+#define false 0
+#define true 1
+
 int digitalRead(int);
 int analogRead(int);
 
