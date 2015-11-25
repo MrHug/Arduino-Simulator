@@ -36,9 +36,11 @@ void SimulatorWindow::updateInformation() {
 void SimulatorWindow::on_BtnStart_clicked()
 {
     sim->start();
+    this->sim->robot->taskSwitch.updateValue(this->ui->spBoxTask->value() -1);
     ui->BtnStart->setEnabled(false);
     ui->BtnStop->setEnabled(true);
     ui->BtnReset->setEnabled(true);
+    ui->BtnSoftReset->setEnabled(true);
 }
 void SimulatorWindow::on_BtnStop_clicked()
 {
@@ -177,6 +179,14 @@ void SimulatorWindow::on_BtnReset_clicked()
     ui->BtnStep->setEnabled(false);
     ui->BtnStop->setEnabled(false);
     ui->BtnReset->setEnabled(false);
+    ui->BtnSoftReset->setEnabled(false);
     ui->BtnOpen->setEnabled(true);
 }
 
+
+void SimulatorWindow::on_BtnSoftReset_clicked()
+{
+    this->sim->softReset();
+    ui->BtnStart->setEnabled(true);
+    ui->BtnStop->setEnabled(false);
+}

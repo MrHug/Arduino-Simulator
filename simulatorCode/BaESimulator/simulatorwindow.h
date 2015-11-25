@@ -56,6 +56,8 @@ private slots:
 
     void on_BtnReset_clicked();
 
+    void on_BtnSoftReset_clicked();
+
 private:
     Ui::SimulatorWindow *ui;
 

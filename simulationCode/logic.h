@@ -17,6 +17,7 @@
 
 int digitalRead(int);
 int analogRead(int);
+void delay(int);
 
 void task1();
 void task2();

@@ -35,7 +35,7 @@ Simulator::~Simulator() {
 
 void Simulator::cleanup() {
     this->parent->addLog("Cleaning simulator");
-    int x = system("ps -Af | grep ./arduinoSim | awk '{ print $2 }' | head -n 1 | xargs kill");
+    int x = system("pkill arduinoSim");//system("ps -Af | grep ./arduinoSim | awk '{ print $2 }' | head -n 1 | xargs kill");
     this->parent->addLog(QString("ps kill output: %1").arg(x));
     motorThreadLeft->terminate();
     motorThreadRight->terminate();
@@ -52,17 +52,12 @@ bool Simulator::startFromFile(QString &fileName) {
     this->parent->addLog(QString("Starting from file %1").arg(fileName));
     QString cmd = QString("cp %1 ./simFiles/tasks.ino").arg(fileName);
     int x = system(cmd.toStdString().c_str());
+    system("pkill arduinoSim");
     this->parent->addLog(QString("Result of cp: %1").arg(x));
     x = system("cd simFiles && make");
     this->parent->addLog(QString("Result of make: %1").arg(x));
     if (x == 0) {
-        x = system("./arduinoSim &");
-        if (x == 0) {
-            createThreads();
-            updateSensors();
-        } else {
-            this->parent->addLog(QString("Can not start simulation. Ask a TA for assistance"));
-        }
+        startArduinoSim();
     } else {
         QMessageBox messageBox;
         messageBox.critical(0,"Error","The code provided here can not be compiled! Check the Arduino error messages");
@@ -70,6 +65,16 @@ bool Simulator::startFromFile(QString &fileName) {
         messageBox.show();
     }
     return x == 0;
+}
+
+void Simulator::startArduinoSim() {
+    int x = system("./arduinoSim &");
+    if (x == 0) {
+        createThreads();
+        updateSensors();
+    } else {
+        this->parent->addLog(QString("Can not start simulation. Ask a TA for assistance"));
+    }
 }
 
 void Simulator::start() {
@@ -97,6 +102,13 @@ void Simulator::reset() {
     this->stop();
     this->cleanup();
     this->setMap(mapNum);
+}
+
+void Simulator::softReset() {
+    this->stop();
+    this->cleanup();
+    this->setMap(mapNum);
+    this->startArduinoSim();
 }
 
 void Simulator::setMap(int mapNum) {

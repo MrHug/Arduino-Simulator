@@ -77,3 +77,7 @@ int digitalRead(int a) {
 int analogRead(int a) {
 	return 0;
 }
+
+void delay(int t) {
+	usleep(1000*t);
+}

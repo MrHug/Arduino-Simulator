@@ -26,6 +26,7 @@ public:
     void step();
     void stop();
     void reset();
+    void softReset();
     void setMap(int mapNum);
     Robot *robot;
 private:
@@ -40,6 +41,7 @@ private:
     void updateSensors();
     void getRobotPoints(QPoint p[]);
     void getRobotPoints(Point p[]);
+    void startArduinoSim();
 
     Map *map;
 

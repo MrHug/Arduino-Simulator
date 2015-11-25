@@ -21,7 +21,7 @@
     <property name="geometry">
      <rect>
       <x>750</x>
-      <y>130</y>
+      <y>96</y>
       <width>99</width>
       <height>27</height>
      </rect>
@@ -37,7 +37,7 @@
     <property name="geometry">
      <rect>
       <x>750</x>
-      <y>170</y>
+      <y>136</y>
       <width>99</width>
       <height>27</height>
      </rect>
@@ -53,7 +53,7 @@
     <property name="geometry">
      <rect>
       <x>750</x>
-      <y>90</y>
+      <y>56</y>
       <width>99</width>
       <height>27</height>
      </rect>
@@ -521,7 +521,7 @@
     <property name="geometry">
      <rect>
       <x>750</x>
-      <y>50</y>
+      <y>16</y>
       <width>101</width>
       <height>27</height>
      </rect>
@@ -673,6 +673,22 @@
      <string>Angles are defined clockwise from the front of the robot</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="BtnSoftReset">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>750</x>
+      <y>170</y>
+      <width>99</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Restart</string>
+    </property>
+   </widget>
    <widget class="QPushButton" name="BtnReset">
     <property name="enabled">
      <bool>false</bool>
@@ -680,7 +696,7 @@
     <property name="geometry">
      <rect>
       <x>750</x>
-      <y>204</y>
+      <y>200</y>
       <width>99</width>
       <height>27</height>
      </rect>
